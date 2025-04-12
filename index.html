@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ByteTrip - Produtos Sintéticos</title>
+  <!-- Favicon de emoji 💊 -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💊</text></svg>">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <!-- Fonte tech -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #0a0a0a;
+      font-family: 'Orbitron', sans-serif;
+    }
+  </style>
+</head>
+<body class="text-white">
+
+  <!-- HEADER -->
+  <header class="w-full px-6 py-4 flex items-center justify-between bg-gray-900 border-b border-gray-800 shadow-md fixed top-0 left-0 z-50">
+    <!-- LOGO -->
+    <div class="text-pink-500 font-bold text-xl tracking-wide uppercase">
+      ByteTrip
+    </div>
+
+    <!-- BOTÃO CARRINHO -->
+    <button onclick="abrirModal()" class="bg-pink-600 hover:bg-pink-700 text-white py-2 px-4 rounded shadow text-sm transition">
+      🛒 Finalizar Pedido (<span id="contadorItens">0</span>)
+    </button>
+  </header>
+
+  <section class="container mx-auto px-4 py-12 mt-24">
+
+    <h2 class="text-2xl sm:text-3xl font-bold text-pink-500 mb-6 text-center sm:text-left">
+      💊 Produtos disponíveis
+    </h2>
+
+    <!-- Cards -->
+    <div id="vitrine" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      
+    </div>
+  </section>
+
+  <!-- MODAL -->
+  <div id="modal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div class="bg-gray-900 p-6 rounded-xl w-full max-w-lg shadow-xl text-white relative">
+      <button onclick="fecharModal()" class="absolute top-3 right-4 text-gray-400 hover:text-red-500 text-xl">×</button>
+      <h2 class="text-xl font-bold mb-4">Finalizar Pedido</h2>
+
+      <div class="mb-4">
+        <h3 class="text-pink-400 text-sm font-semibold mb-2">Produtos Selecionados:</h3>
+        <ul id="resumoCarrinho" class="text-sm text-gray-300 space-y-2 mb-3"></ul>
+        <p class="text-right text-lg text-pink-400 font-bold">
+          Total: R$ <span id="totalCarrinho">0,00</span>
+        </p>
+      </div>
+
+      <form id="pedidoForm" onsubmit="enviarPedido(event)">
+        <div class="mb-4">
+          <label class="block text-sm mb-1">Nome</label>
+          <input type="text" name="nome" placeholder="Seu nome" required class="w-full p-2 bg-gray-800 rounded border border-gray-700">
+        </div>
+        <div class="mb-4">
+          <label class="block text-sm mb-1">Telefone</label>
+          <input
+            type="tel"
+            name="telefone"
+            placeholder="Ex: 37 998030748"
+            required
+            id="telefone"
+            class="w-full p-2 bg-gray-800 rounded border border-gray-700"
+          />
+        </div>
+        <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 py-2 rounded font-semibold transition">Enviar Pedido</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="fixed bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded shadow-lg text-sm opacity-0 transition-all duration-300 z-50 pointer-events-none">
+    <span id="toastMessage">Mensagem</span>
+  </div>
+
+  <footer class="mt-12 text-center text-sm text-gray-500 py-6 border-t border-gray-800 px-4">
+    <p class="mb-1">
+      Este site foi criado <strong>exclusivamente para fins educacionais</strong>, sem qualquer intenção de comercialização real de produtos.
+    </p>
+    <p class="mb-1">
+      Todo o código, design e imagens foram desenvolvidos com o auxílio do <strong>ChatGPT</strong>, incluindo geração de conteúdo e simulações.
+    </p>
+    <p class="mb-1">
+      As integrações foram feitas utilizando <strong>n8n</strong> e <strong>EvolutionAPI</strong>.
+    </p>
+    <p class="mb-1">
+      Desenvolvido por <strong>Gabriel Teles</strong> — 
+      <a href="http://instagram.com/gabrieltelescr" target="_blank" class="text-pink-400 hover:text-pink-300 underline">
+        @gabrieltelescr
+      </a>
+    </p>
+    <p class="mt-2 text-xs text-gray-600">© 2025 ByteTrip</p>
+  </footer>
+
+  <script src="/assets/js/script.js"></script>
+    <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out'
+    });
+  </script>
+
+</body>
+</html>

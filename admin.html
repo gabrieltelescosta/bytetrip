@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Admin - ByteTrip</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+  <script defer src="/assets/js/admin.js"></script>
+  <!-- Favicon de emoji 💊 -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💊</text></svg>">
+  <!-- Fonte tech -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+    <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-950 text-white min-h-screen">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      font-family: 'Orbitron', sans-serif;
+    }
+  </style>
+
+  <!-- Login -->
+  <div id="loginContainer" class="flex flex-col items-center justify-center h-screen">
+    <h1 class="text-2xl font-bold mb-4">Acessar Painel Admin</h1>
+    <form id="loginForm" class="flex flex-col gap-4 w-80">
+      <input type="email" name="email" placeholder="Seu e-mail" required class="p-2 rounded bg-gray-800 border border-gray-700">
+      <input type="password" name="senha" placeholder="Sua senha" required class="p-2 rounded bg-gray-800 border border-gray-700" autocomplete="current-password">
+      <button type="submit" class="bg-pink-600 hover:bg-pink-700 rounded p-2 font-semibold">Entrar</button>
+    </form>
+  </div>
+  
+  <!-- Admin -->
+  <div id="adminContainer" class="hidden p-6 max-w-4xl mx-auto">
+    <div class="flex justify-between items-center mb-6">
+      <h2 class="text-2xl font-bold">Produtos</h2>
+      <button onclick="logout()" class="text-sm text-pink-400 hover:underline">Sair</button>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded shadow hidden z-50 text-sm font-semibold"></div>
+
+    <!-- Formulário de produto -->
+    <form id="produtoForm" class="grid grid-cols-1 sm:grid-cols-4 gap-4 mb-2">
+      <input type="text" name="nome" placeholder="Nome" required class="p-2 bg-gray-800 border border-gray-700 rounded">
+      <input type="text" name="descricao" placeholder="Descrição" required class="p-2 bg-gray-800 border border-gray-700 rounded">
+      <input type="number" step="0.01" name="preco" placeholder="Preço" required class="p-2 bg-gray-800 border border-gray-700 rounded">
+      <input type="text" name="imagem_url" placeholder="URL da imagem" required class="p-2 bg-gray-800 border border-gray-700 rounded">
+      <button class="col-span-1 sm:col-span-4 bg-pink-600 hover:bg-pink-700 p-2 rounded font-semibold">Adicionar Produto</button>
+    </form>
+
+    <button type="button" onclick="cancelarEdicao()" id="cancelarEdicaoBtn"
+      class="text-sm text-gray-400 hover:underline hidden mb-4">
+      Cancelar edição
+    </button>
+
+    <div class="mb-4">
+      <label class="text-sm mr-2">Ordenar por:</label>
+      <select id="ordenarSelect" onchange="carregarProdutos()" class="bg-gray-800 text-white text-sm rounded px-2 py-1 border border-gray-700">
+        <option value="created_at">Mais recentes</option>
+        <option value="nome">Nome (A-Z)</option>
+        <option value="preco">Preço</option>
+      </select>
+    </div>
+
+    <!-- Lista de produtos -->
+    <div id="listaProdutos" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </div>
+    <!-- AOS JS -->
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-in-out'
+    });
+  </script>
+</body>
+</html>
