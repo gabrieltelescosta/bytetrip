@@ -1,17 +1,19 @@
 let carrinho = [];
 
+// Adiciona produto ao carrinho
 function adicionarAoCarrinho(button) {
   const card = button.closest('article');
+
   const produto = {
     id: card.dataset.id,
     nome: card.dataset.name,
-    preco: parseFloat(card.dataset.price),
+    preco: parseFloat(card.dataset.price)
   };
 
   const inputQtd = card.querySelector('.quantidade-input');
   const quantidade = parseInt(inputQtd.value);
 
-  if (!quantidade || quantidade < 1) {
+  if (Number.isNaN(quantidade) || quantidade < 1) {
     mostrarToast("Informe uma quantidade válida", "error");
     return;
   }
@@ -20,8 +22,7 @@ function adicionarAoCarrinho(button) {
   if (existente) {
     existente.quantidade += quantidade;
   } else {
-    produto.quantidade = quantidade;
-    carrinho.push(produto);
+    carrinho.push({ ...produto, quantidade });
   }
 
   atualizarContador();
@@ -29,11 +30,13 @@ function adicionarAoCarrinho(button) {
   inputQtd.value = 1;
 }
 
+// Atualiza contador de itens no botão do carrinho
 function atualizarContador() {
   const total = carrinho.reduce((soma, item) => soma + item.quantidade, 0);
   document.getElementById('contadorItens').innerText = total;
 }
 
+// Exibe mensagem toast
 function mostrarToast(msg, tipo = "success") {
   const toast = document.getElementById('toast');
   const message = document.getElementById('toastMessage');
@@ -41,8 +44,7 @@ function mostrarToast(msg, tipo = "success") {
   toast.classList.remove('opacity-0', 'bg-green-600', 'bg-red-600');
   message.innerText = msg;
 
-  toast.classList.add(tipo === "error" ? 'bg-red-600' : 'bg-green-600');
-  toast.classList.add('opacity-100');
+  toast.classList.add(tipo === "error" ? 'bg-red-600' : 'bg-green-600', 'opacity-100');
 
   setTimeout(() => {
     toast.classList.remove('opacity-100');
@@ -50,6 +52,7 @@ function mostrarToast(msg, tipo = "success") {
   }, 2500);
 }
 
+// Abre modal de finalização
 function abrirModal() {
   if (carrinho.length === 0) {
     mostrarToast("Carrinho vazio!", "error");
@@ -77,22 +80,21 @@ function abrirModal() {
   document.getElementById('modal').classList.remove('hidden');
 }
 
+// Fecha modal
 function fecharModal() {
   document.getElementById('modal').classList.add('hidden');
 }
 
+// Remove item do carrinho
 function removerDoCarrinho(id) {
   carrinho = carrinho.filter(item => item.id !== id);
   atualizarContador();
   mostrarToast("Item removido", "success");
 
-  if (carrinho.length === 0) {
-    fecharModal();
-  } else {
-    abrirModal();
-  }
+  carrinho.length === 0 ? fecharModal() : abrirModal();
 }
 
+// Envia pedido via fetch
 function enviarPedido(event) {
   event.preventDefault();
 
@@ -110,13 +112,13 @@ function enviarPedido(event) {
     return;
   }
 
-  const total = carrinho.reduce((soma, item) => soma + item.preco * item.quantidade, 0);
+  const valorTotal = carrinho.reduce((soma, item) => soma + item.preco * item.quantidade, 0);
 
   const pedido = {
     nome,
     telefone,
     produtos: carrinho,
-    valor_total: total.toFixed(2),
+    valor_total: valorTotal.toFixed(2)
   };
 
   fetch("https://webhook.bltrack.com/webhook/envio", {
@@ -137,3 +139,16 @@ function enviarPedido(event) {
   })
   .catch(() => mostrarToast("Erro de conexão", "error"));
 }
+
+// Aplica máscara no campo de telefone (formato: 37 998030748)
+const telInput = document.getElementById('telefone');
+
+telInput?.addEventListener('input', () => {
+  let valor = telInput.value.replace(/\D/g, '');
+
+  if (valor.length >= 2) {
+    valor = valor.replace(/^(\d{2})(\d+)/g, '$1 $2');
+  }
+
+  telInput.value = valor.slice(0, 12); // Limita a 11 dígitos + espaço
+});
