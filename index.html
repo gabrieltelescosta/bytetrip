@@ -119,11 +119,18 @@
       <form id="pedidoForm" onsubmit="enviarPedido(event)">
         <div class="mb-4">
           <label class="block text-sm mb-1">Nome</label>
-          <input type="text" name="nome" required class="w-full p-2 bg-gray-800 rounded border border-gray-700">
+          <input type="text" name="nome" placeholder="Seu nome" required class="w-full p-2 bg-gray-800 rounded border border-gray-700">
         </div>
         <div class="mb-4">
           <label class="block text-sm mb-1">Telefone</label>
-          <input type="tel" name="telefone" required class="w-full p-2 bg-gray-800 rounded border border-gray-700">
+          <input
+            type="tel"
+            name="telefone"
+            placeholder="Ex: 37 998030748"
+            required
+            id="telefone"
+            class="w-full p-2 bg-gray-800 rounded border border-gray-700"
+          />
         </div>
         <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 py-2 rounded font-semibold transition">Enviar Pedido</button>
       </form>
@@ -136,29 +143,23 @@
   </div>
 
   <footer class="mt-12 text-center text-sm text-gray-500 py-6 border-t border-gray-800 px-4">
-  <p class="mb-1">
-    Este site foi criado <strong>exclusivamente para fins educacionais</strong>, sem qualquer intenção de comercialização real de produtos.
-  </p>
-  <p class="mb-1">
-    Todo o código, design e imagens foram desenvolvidos com o auxílio do <strong>ChatGPT</strong>, incluindo geração de conteúdo e simulações.
-  </p>
-  <p class="mb-1">
-    As integrações foram feitas utilizando <strong>n8n</strong> e <strong>EvolutionAPI</strong>.
-  </p>
-  <p class="mb-1">
-    Desenvolvido por <strong>Gabriel Teles</strong> —
-    <a href="http://instagram.com/gabrieltelescr" target="_blank" class="text-pink-400 hover:text-pink-300 underline">
-      @gabrieltelescr
-    </a>
-  </p>
-  <p class="mb-1">
-    Código-fonte disponível no GitHub:  
-    <a href="https://github.com/gabrieltelescosta/bytetrip" target="_blank" class="text-pink-400 hover:text-pink-300 underline">
-      github.com/gabrieltelescosta/bytetrip
-    </a>
-  </p>
-  <p class="mt-2 text-xs text-gray-600">© 2025 ByteTrip</p>
-</footer>
+    <p class="mb-1">
+      Este site foi criado <strong>exclusivamente para fins educacionais</strong>, sem qualquer intenção de comercialização real de produtos.
+    </p>
+    <p class="mb-1">
+      Todo o código, design e imagens foram desenvolvidos com o auxílio do <strong>ChatGPT</strong>, incluindo geração de conteúdo e simulações.
+    </p>
+    <p class="mb-1">
+      As integrações foram feitas utilizando <strong>n8n</strong> e <strong>EvolutionAPI</strong>.
+    </p>
+    <p class="mb-1">
+      Desenvolvido por <strong>Gabriel Teles</strong> — 
+      <a href="http://instagram.com/gabrieltelescr" target="_blank" class="text-pink-400 hover:text-pink-300 underline">
+        @gabrieltelescr
+      </a>
+    </p>
+    <p class="mt-2 text-xs text-gray-600">© 2025 ByteTrip</p>
+  </footer>
 
   <script src="/src/script.js"></script>
 
