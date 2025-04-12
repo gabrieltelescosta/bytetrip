@@ -24,12 +24,6 @@ Este projeto foi desenvolvido para praticar e demonstrar:
 
 ---
 
-## 🖼️ Preview
-
-![byte-trip-preview](https://via.placeholder.com/1000x600?text=ByteTrip+Preview)
-
----
-
 ## ⚠️ Aviso Legal
 
 > Este projeto é **100% fictício e educacional**.  
