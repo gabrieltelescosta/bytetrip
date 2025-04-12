@@ -2,6 +2,14 @@ const supabaseUrl = 'https://iwgizrizoagjtaivwjcf.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml3Z2l6cml6b2FnanRhaXZ3amNmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQ0NjA3ODMsImV4cCI6MjA2MDAzNjc4M30.0V1iGuJlzm6rP1ibfBdQc-fQa12bz8bM2Xclnp1PDqU'; // sua anon key
 const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
 
+supabase
+  .from('produtos')
+  .select('*')
+  .limit(1)
+  .then(({ data, error }) => {
+    console.log("Verificando Supabase:", { data, error });
+  });
+
 async function carregarProdutos() {
   const { data, error } = await supabase.from('produtos').select('*').order('created_at', { ascending: false });
   if (error) {
