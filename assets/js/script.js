@@ -10,7 +10,7 @@ async function carregarProdutos() {
   }
 
   const container = document.getElementById('vitrine');
-  container.innerHTML = '';
+  
 
   data.forEach((prod, index) => {
     const artigo = document.createElement('article');
