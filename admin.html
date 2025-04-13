@@ -7,7 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
   <script defer src="/assets/js/admin.js"></script>
-  <!-- Favicon de emoji 💊 -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💊</text></svg>">
   <!-- Fonte tech -->
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
@@ -22,15 +21,30 @@
     }
   </style>
 
-  <!-- Login -->
-  <div id="loginContainer" class="flex flex-col items-center justify-center h-screen">
-    <h1 class="text-2xl font-bold mb-4">Acessar Painel Admin</h1>
-    <form id="loginForm" class="flex flex-col gap-4 w-80">
-      <input type="email" name="email" placeholder="Seu e-mail" required class="p-2 rounded bg-gray-800 border border-gray-700">
-      <input type="password" name="senha" placeholder="Sua senha" required class="p-2 rounded bg-gray-800 border border-gray-700" autocomplete="current-password">
-      <button type="submit" class="bg-pink-600 hover:bg-pink-700 rounded p-2 font-semibold">Entrar</button>
-    </form>
-  </div>
+  <aside class="fixed top-0 left-0 h-full w-50 bg-gray-900 border-r border-gray-800 shadow-lg z-50 flex flex-col">
+    <div class="px-4 py-6 text-center border-b border-gray-800">
+      <h1 class="text-pink-500 text-xl font-bold tracking-wide">ByteTrip</h1>
+    </div>
+    <nav class="flex-1 px-4 py-6 space-y-4 text-sm">
+      <a href="/admin.html" class="block px-3 py-2 rounded hover:bg-gray-800 transition text-gray-300 hover:text-white">
+        🔧 Gerenciar Produtos
+      </a>
+      <a href="/lancamentos.html" class="block px-3 py-2 rounded hover:bg-gray-800 transition text-gray-300 hover:text-white">
+        📥 Lançamentos
+      </a>
+    </nav>
+  </aside>
+
+  <main class="ml-48 p-6">
+    <!-- LOGIN -->
+    <section id="loginSection" class="max-w-sm mx-auto mt-32">
+      <h1 class="text-2xl font-bold text-pink-400 mb-6 text-center">🔐 Login</h1>
+      <form id="loginForm" class="flex flex-col gap-4">
+        <input type="email" name="email" placeholder="Seu e-mail" required class="p-2 rounded bg-gray-800 border border-gray-700" />
+        <input type="password" name="senha" placeholder="Sua senha" required class="p-2 rounded bg-gray-800 border border-gray-700" />
+        <button type="submit" class="bg-pink-600 hover:bg-pink-700 py-2 rounded font-semibold">Entrar</button>
+      </form>
+    </section>
   
   <!-- Admin -->
   <div id="adminContainer" class="hidden p-6 max-w-4xl mx-auto">
@@ -68,6 +82,9 @@
     <!-- Lista de produtos -->
     <div id="listaProdutos" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
   </div>
+  </main>
+
+  
     <!-- AOS JS -->
   <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
